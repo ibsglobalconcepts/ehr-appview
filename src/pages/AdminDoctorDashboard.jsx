@@ -1,8 +1,18 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom"; // <-- single import only
 
-// Patient Module pages (we will add more as you build them)
+// Patient Module pages
 import CreatePatient from "../modules/patient/create-patient/CreatePatient";
+
+import CreateConsultation from './features/patient-module/consult/CreateConsultation';
+import ConsultationAI from './features/patient-module/consult/ConsultationAI';
+import UpdateConsultation from './features/patient-module/consult/UpdateConsultation';
+import ViewConsultation from './features/patient-module/consult/ViewConsultation';
+
+import AddVitals from './features/patient-module/vitals/AddVitals';
+import GetVitals from './features/patient-module/vitals/GetVitals';
+import UpdateVitals from './features/patient-module/vitals/UpdateVitals';
 
 export default function AdminDoctorDashboard() {
   return (
@@ -23,25 +33,9 @@ export default function AdminDoctorDashboard() {
   );
 }
 
-import CreateConsultation from './features/patient-module/consult/CreateConsultation';
-import ConsultationAI from './features/patient-module/consult/ConsultationAI';
-import UpdateConsultation from './features/patient-module/consult/UpdateConsultation';
-import ViewConsultation from './features/patient-module/consult/ViewConsultation';
-
 // ------------------------
-// ROUTES
+// ROUTE WRAPPERS
 // ------------------------
-
-// Place these inside <Routes>
-/*
-<Route path="/patient/consult/create" element={<CreateConsultation />} />
-<Route path="/patient/consult/ai" element={<ConsultationAI />} />
-<Route path="/patient/consult/:id" element={<ViewConsultationWrapper />} />
-<Route path="/patient/consult/:id/edit" element={<UpdateConsultationWrapper />} />
-*/
-
-// Wrappers to extract the :id param
-import { useParams } from 'react-router-dom';
 
 function ViewConsultationWrapper() {
   const { id } = useParams();
@@ -53,29 +47,16 @@ function UpdateConsultationWrapper() {
   return <UpdateConsultation consultationId={Number(id)} />;
 }
 
-
-// add these imports where your routes are defined
-import AddVitals from './features/patient-module/vitals/AddVitals';
-import GetVitals from './features/patient-module/vitals/GetVitals';
-import UpdateVitals from './features/patient-module/vitals/UpdateVitals';
-
-// Example routes inside <Routes>
-/*
-<Route path="/patient/:fileNumber/vitals" element={<VitalsPageWrapper />} />
-<Route path="/patient/:fileNumber/vitals/create" element={<CreateVitalsWrapper />} />
-<Route path="/patient/:fileNumber/vitals/:vitalId/edit" element={<UpdateVitalsWrapper />} />
-*/
-
-// Wrappers to extract params
-import { useParams } from 'react-router-dom';
 function VitalsPageWrapper() {
   const { fileNumber } = useParams();
   return <GetVitals fileNumber={fileNumber} />;
 }
+
 function CreateVitalsWrapper() {
   const { fileNumber } = useParams();
   return <AddVitals fileNumber={fileNumber} />;
 }
+
 function UpdateVitalsWrapper() {
   const { fileNumber, vitalId } = useParams();
   return <UpdateVitals fileNumber={fileNumber} vitalId={Number(vitalId)} />;
