@@ -3,7 +3,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom"; // <-- single import only
 
 // Patient Module pages
-import CreatePatient from "../modules/patient/create-patient/CreatePatient";
+import NewPatient from "../features/patient-module/new-patient/NewPatient";
+
 
 import CreateConsultation from './features/patient-module/consult/CreateConsultation';
 import ConsultationAI from './features/patient-module/consult/ConsultationAI';
